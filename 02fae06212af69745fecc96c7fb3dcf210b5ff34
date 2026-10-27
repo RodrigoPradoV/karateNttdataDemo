@@ -1,0 +1,14 @@
+Validación de endurecimiento Karate
+SHA: 02fae06212af69745fecc96c7fb3dcf210b5ff34
+GitHub Actions UTC: 2026-10-27T14:59:55Z - run 40526574821 - conclusión success
+Entorno: Ubuntu 24.04 / Java 17 / Maven
+Suite: 9/9 escenarios, 0 fallos, 0 errores, 0 omitidos
+Cambio validado: 404 deterministas mediante create -> delete -> get para PetStore y Restful Booker
+Reportes: Karate y Cucumber HTML generados; dependency tree capturado
+Seguridad: 34 archivos revisados, sin secretos expuestos
+Retención: 90 días, hasta 2027-01-25
+Artifact evidencia: ID 12742524853, SHA-256 a30f6c737d38524765f3c70def7151538c123f92360892e1d1b52e048aadc8c4
+Artifact seguridad: ID 12742529971, SHA-256 bb0fe42f475638efd9e0b09864ac71808ed72e786e1c6ba65bddff637ea3337a
+Copia de seguridad descargada y verificada: Ejecucion-Karate/Ejecucion-3/
+La descarga local del artifact de evidencia quedó pendiente por límite temporal de egress; la copia remota permanece disponible y verificada por el digest publicado de GitHub.
+Run: https://github.com/RodrigoPradoV/karateNttdataDemo/actions/runs/40526574821
