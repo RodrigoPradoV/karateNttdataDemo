@@ -73,6 +73,7 @@ jobs:
           name: karate-security-summary-${{ github.sha }}
           path: target/security/secret-scan-summary.txt
           if-no-files-found: warn
+          retention-days: 90
 
       - name: Publish safe Karate evidence
         if: ${{ always() && steps.secret_scan.outcome == 'success' }}
@@ -86,4 +87,4 @@ jobs:
             target/evidence/
             target/security/secret-scan-summary.txt
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 90

@@ -70,9 +70,21 @@ Feature: Contrato de mascotas de PetStore
     * def petCleanupRequired = false
 
   @get @negative
-  Scenario: consultar una mascota inexistente devuelve 404
-    * def missingPetId = java.lang.Math.abs(java.util.UUID.randomUUID().hashCode())
-    Given path 'pet', missingPetId
+  Scenario: consultar una mascota eliminada por el escenario devuelve 404
+    * def petId = java.lang.Math.abs(java.util.UUID.randomUUID().hashCode())
+    * def petCleanupRequired = true
+    * def pet = { id: '#(petId)', name: '#("Negative-" + petId)', photoUrls: [], status: 'available' }
+    Given path 'pet'
+    And request pet
+    When method post
+    Then status 200
+
+    Given path 'pet', petId
+    When method delete
+    Then status 200
+
+    Given path 'pet', petId
     When method get
     Then status 404
     And match response == { code: 1, type: 'error', message: 'Pet not found' }
+    * def petCleanupRequired = false

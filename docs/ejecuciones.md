@@ -21,3 +21,14 @@ Las filas marcadas como cambio aún no confirmado o evidencia temporal conservan
 | 2026-10-27T05:30Z | `6d38c64f8ad93344e504c8232fcd2671f7774d51` | GitHub Actions, Ubuntu 24.04 / Java 17.0.20.1 / Maven 3.10.0 | `mvn -B -ntp clean test` + generación Cucumber + scan | Aprobado: 9/9 escenarios, 2 features en Cucumber y 34 archivos revisados sin secretos expuestos | [Run `40455709946`](https://github.com/RodrigoPradoV/karateNttdataDemo/actions/runs/40455709946); artifact `karate-evidence-6d38c64f8ad93344e504c8232fcd2671f7774d51`, ID `12711219868`; copia en `Ejecucion-Karate/Ejecucion-2/` |
 
 Las ejecuciones limpias se registran en el resumen generado y en la nota Git `qa-validation` sin alterar el SHA probado. El workflow base fue el run `40448399804`; el cierre final con reporte Cucumber y contratos negativos reforzados corresponde al run `40455709946` sobre `6d38c64`. El artifact incluye el SHA completo, el resultado real del comando, los reportes y el resumen de seguridad.
+
+## Regresión de 404 deterministas
+
+El 2026-10-27 se reemplazaron las precondiciones negativas basadas en IDs supuestamente libres por recursos controlados por cada escenario:
+
+- PetStore: POST del ID único, DELETE 200 y GET 404 con contrato JSON aprobado.
+- Restful Booker: autenticación, POST de reserva, DELETE 201 y GET 404 con `text/plain` y cuerpo `Not Found` aprobados.
+- El indicador de cleanup permanece activo hasta completar la comprobación 404; si una aserción intermedia falla, el hook conserva su recuperación idempotente.
+- Regresión local focalizada: PetStore 4/4 y Restful Booker 5/5 escenarios aprobados.
+
+El workflow conserva 9 escenarios y publicará la evidencia del mismo SHA con una retención de 90 días. El run, IDs y hashes se relacionan mediante la nota Git `refs/notes/qa-validation` después de la validación remota.

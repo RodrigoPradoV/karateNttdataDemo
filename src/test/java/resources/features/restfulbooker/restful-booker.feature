@@ -109,10 +109,30 @@ Feature: Autenticación y actualización parcial de Restful Booker
     Then status 404
 
   @get @negative
-  Scenario: consultar un identificador de reserva inexistente devuelve 404
-    Given path 'booking', 2147483647
+  Scenario: consultar una reserva eliminada por el escenario devuelve 404
+    Given path 'auth'
+    And request { username: '#(bookerUsername)', password: '#(bookerPassword)' }
+    When method post
+    Then status 200
+    * def authToken = response.token
+
+    Given path 'booking'
+    And header Accept = 'application/json'
+    And request booking
+    When method post
+    Then status 200
+    * def bookingId = response.bookingid
+    * def bookingCleanupRequired = true
+
+    Given path 'booking', bookingId
+    And header Cookie = 'token=' + authToken
+    When method delete
+    Then status 201
+
+    Given path 'booking', bookingId
     And header Accept = 'application/json'
     When method get
     Then status 404
     And match header Content-Type contains 'text/plain'
     And match response == 'Not Found'
+    * def bookingCleanupRequired = false
