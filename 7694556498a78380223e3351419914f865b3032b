@@ -1,5 +1,21 @@
-Validación local final
+Validación final Karate
+
 SHA: 7694556498a78380223e3351419914f865b3032b
-Run 1 UTC: 2026-10-27T03:18:36Z - exit 0, 9/9 escenarios, secret scan aprobado
-Run 2 UTC: 2026-10-27T03:19:49Z - exit 0, 9/9 escenarios, secret scan aprobado
-GitHub Actions: pendiente por ausencia de remoto configurado
+
+Run local 1 UTC: 2026-10-27T03:18:36Z - exit 0, 9/9 escenarios, secret scan aprobado
+
+Run local 2 UTC: 2026-10-27T03:19:49Z - exit 0, 9/9 escenarios, secret scan aprobado
+
+GitHub Actions run: https://github.com/RodrigoPradoV/karateNttdataDemo/actions/runs/40448399804
+
+Artifacts: security 12709541549; evidence 12709242179
+
+CI UTC: 2026-10-27T04:12:30Z - exit 0, Java 17.0.20.1, Maven 3.10.0
+
+CI Karate 1.2.0: 2 features, 9 escenarios aprobados, 0 fallidos, 0 omitidos; PetStore 4 y Restful Booker 5
+
+Contrato observado: PATCH sin autenticación 403; PATCH autenticado 200; DELETE 201; consulta posterior 404
+
+Seguridad: aprobada; 17 archivos revisados y tokens/credenciales enmascarados
+
+Observación CI: GitHub emitió advertencia de runtime Node 20 para actions internas forzado a Node 24; no afecta Java 17 ni la suite Maven.
