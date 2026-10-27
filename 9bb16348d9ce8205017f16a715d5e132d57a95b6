@@ -1,0 +1,10 @@
+Validación de cierre documental de Karate
+SHA: 9bb16348d9ce8205017f16a715d5e132d57a95b6
+GitHub Actions UTC: 2026-10-27T14:12:33Z - run 40518915600 - conclusión success
+Entorno: Ubuntu 24.04, Java 17.0.21, Maven 3.10.0
+Suite: mvn -B -ntp clean test exit 0 - 9/9 escenarios, 0 fallos, 0 errores, 0 omitidos
+Reportes: Karate y Cucumber HTML generados para 2 features
+Seguridad: 34 archivos revisados, sin secretos expuestos
+Artifact evidencia: karate-evidence-9bb16348d9ce8205017f16a715d5e132d57a95b6, ID 12740362986, SHA-256 7c2907c71be690d2083491595739f64331ed379122731cdae1365d6f48b9820f
+Artifact seguridad: karate-security-summary-9bb16348d9ce8205017f16a715d5e132d57a95b6, ID 12739519864, SHA-256 9f1df41dddb94b5e6665a421dfa759896fcfdc739e5c06fc6ea24e5ab794c5a5
+Run: https://github.com/RodrigoPradoV/karateNttdataDemo/actions/runs/40518915600
