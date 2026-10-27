@@ -6,8 +6,8 @@ $ErrorActionPreference = 'Stop'
 $outputDirectory = Join-Path (Get-Location) 'target/evidence'
 New-Item -ItemType Directory -Force -Path $outputDirectory | Out-Null
 $sha = (git rev-parse HEAD).Trim()
-$javaVersion = (& java -version 2>&1 | Select-Object -First 1)
-$mavenVersion = (& mvn -version 2>&1 | Select-Object -First 1)
+$javaVersion = (& java --version | Select-Object -First 1).ToString()
+$mavenVersion = (& mvn -version 2>&1 | Select-Object -First 1).ToString()
 
 @(
     'Repositorio: karateNttdataDemo'
