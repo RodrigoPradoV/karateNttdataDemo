@@ -22,6 +22,7 @@
 | K-D09 | Decisión técnica | Un 4xx/2xx accesible que contradiga el contrato documentado se clasifica como fallo funcional; una excepción de Karate/Maven/configuración es fallo técnico. Ninguna categoría se transforma en aprobada mediante skip. |
 | K-D10 | Decisión técnica | El requisito ambiguo "plugin cucumber" se implementa con `net.masterthought:maven-cucumber-reporting:5.11.0`, que consume el JSON generado por `outputCucumberJson(true)`. El PDF y el baseline no definen artefacto ni versión; la selección se probó con Java 17 antes de incorporarla. |
 | K-D11 | Decisión técnica | El plugin se liga a `verify` para uso local. CI conserva `mvn clean test` como comando principal y genera el HTML en un paso `if: always()` independiente, sin `continue-on-error`; el reporte entra al mismo escaneo bloqueante de secretos antes de publicarse. |
+| K-D12 | Decisión técnica | Los errores de PATCH sin autenticación y GET de reserva inexistente validan estado, `Content-Type` y texto exacto. Los valores `Forbidden` y `Not Found` se incorporaron solo después de observarlos sin variación en tres sondas consecutivas; al ser una API pública, un cambio posterior se conservará como fallo funcional visible. |
 
 El hook se verificó con un feature temporal no versionado: se creó una reserva, se forzó una aserción fallida y el escenario permaneció rojo; después, un GET independiente al `bookingid` creado respondió 404. Una primera ejecución del probe sin header `Accept` recibió 418 de la API pública antes de crear el recurso. El flujo productivo sí envía `Accept: application/json`; ambos resultados se conservaron como diagnóstico, no como evidencia aprobada.
 
@@ -39,12 +40,14 @@ Caracterización controlada del 2026-10-27T02:48Z, con datos únicos y limpieza 
 | Booker POST `/auth` válido | Credenciales válidas | 200 | JSON con token no vacío |
 | Booker POST `/auth` inválido | Credenciales inválidas | 200 | JSON `reason`, sin token utilizable |
 | Booker POST `/booking` | No aplica | 200 | `bookingid` y `booking` |
-| Booker PATCH sin auth | Ninguna | 403 | Texto plano |
+| Booker PATCH sin auth | Ninguna | 403 | `text/plain`; cuerpo `Forbidden` |
 | Booker PATCH con cookie token | Token válido | 200 | Reserva actualizada |
 | Booker DELETE con auth | Token válido | 201 | Texto plano |
-| Booker GET inexistente | No aplica | 404 | Texto plano |
+| Booker GET inexistente | No aplica | 404 | `text/plain`; cuerpo `Not Found` |
 
 La primera sonda autenticada con un cliente HTTP que administraba cookies automáticamente no transmitió el header `Cookie` manual y obtuvo 403. Se repitió con administración automática deshabilitada, se confirmó 200 y se eliminó tanto la reserva de repetición como la reserva residual. Esto se clasifica como limitación del cliente de caracterización, no como defecto de la API.
+
+El 2026-10-27T05:10Z se repitieron tres veces, sin autenticación ni creación de recursos, las sondas PATCH y GET contra un identificador inexistente. Las seis respuestas fueron consistentes: PATCH devolvió 403, `text/plain` y `Forbidden`; GET devolvió 404, `text/plain` y `Not Found`. Esta observación sustenta las aserciones de contenido sin ampliar la cobertura a nuevos endpoints.
 
 ## Mejoras fuera de alcance
 

@@ -56,6 +56,7 @@ Feature: Autenticación y actualización parcial de Restful Booker
     When method patch
     Then status 403
     And match header Content-Type contains 'text/plain'
+    And match response == 'Forbidden'
 
     Given path 'booking', bookingId
     And header Cookie = 'token=' + authToken
@@ -113,3 +114,5 @@ Feature: Autenticación y actualización parcial de Restful Booker
     And header Accept = 'application/json'
     When method get
     Then status 404
+    And match header Content-Type contains 'text/plain'
+    And match response == 'Not Found'
