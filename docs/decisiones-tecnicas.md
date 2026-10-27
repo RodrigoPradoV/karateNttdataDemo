@@ -20,6 +20,8 @@
 | K-D07 | Decisión técnica | `SensitiveDataLogModifier` enmascara headers y campos de password/token en request, response y URI; un script independiente impide publicar artifacts si detecta valores crudos. |
 | K-D08 | Restricción | PetStore y Restful Booker son servicios públicos fuera del control del repositorio. DNS, timeout, conexión, 5xx o estado remoto perdido son dependencia externa y mantienen el job fallido. |
 | K-D09 | Decisión técnica | Un 4xx/2xx accesible que contradiga el contrato documentado se clasifica como fallo funcional; una excepción de Karate/Maven/configuración es fallo técnico. Ninguna categoría se transforma en aprobada mediante skip. |
+| K-D10 | Decisión técnica | El requisito ambiguo "plugin cucumber" se implementa con `net.masterthought:maven-cucumber-reporting:5.11.0`, que consume el JSON generado por `outputCucumberJson(true)`. El PDF y el baseline no definen artefacto ni versión; la selección se probó con Java 17 antes de incorporarla. |
+| K-D11 | Decisión técnica | El plugin se liga a `verify` para uso local. CI conserva `mvn clean test` como comando principal y genera el HTML en un paso `if: always()` independiente, sin `continue-on-error`; el reporte entra al mismo escaneo bloqueante de secretos antes de publicarse. |
 
 El hook se verificó con un feature temporal no versionado: se creó una reserva, se forzó una aserción fallida y el escenario permaneció rojo; después, un GET independiente al `bookingid` creado respondió 404. Una primera ejecución del probe sin header `Accept` recibió 418 de la API pública antes de crear el recurso. El flujo productivo sí envía `Accept: application/json`; ambos resultados se conservaron como diagnóstico, no como evidencia aprobada.
 

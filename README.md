@@ -16,6 +16,14 @@ Suite completa:
 mvn -B -ntp clean test
 ```
 
+Suite completa y reporte HTML Cucumber:
+
+```bash
+mvn -B -ntp clean verify
+```
+
+El reporte Cucumber se genera en `target/cucumber-html-reports/overview-features.html`. El reporte nativo de Karate permanece en `target/karate-reports/karate-summary.html`.
+
 Por tag:
 
 ```bash

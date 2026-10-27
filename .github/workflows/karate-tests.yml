@@ -50,6 +50,11 @@ jobs:
         shell: bash
         run: mvn -B -ntp dependency:tree -Dscope=test -DoutputFile=target/evidence/dependency-tree.txt
 
+      - name: Generate Cucumber HTML report
+        if: always()
+        shell: bash
+        run: mvn -B -ntp net.masterthought:maven-cucumber-reporting:generate
+
       - name: Write execution identity
         if: always()
         shell: pwsh
@@ -76,6 +81,7 @@ jobs:
           name: karate-evidence-${{ github.sha }}
           path: |
             target/karate-reports/
+            target/cucumber-html-reports/
             target/surefire-reports/
             target/evidence/
             target/security/secret-scan-summary.txt

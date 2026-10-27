@@ -12,6 +12,7 @@
         <java.version>17</java.version>
         <maven.compiler.version>3.8.1</maven.compiler.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
+        <maven.cucumber.reporting.version>5.11.0</maven.cucumber.reporting.version>
         <karate.version>1.2.0</karate.version>
         <junit.jupiter.version>5.10.0</junit.jupiter.version>
     </properties>
@@ -71,7 +72,31 @@
                 <configuration>
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
-            </plugin>          
+            </plugin>
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>${maven.cucumber.reporting.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-cucumber-html-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <projectName>Karate NTTData Demo</projectName>
+                    <inputDirectory>${project.build.directory}/karate-reports</inputDirectory>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <jsonFiles>
+                        <param>*.json</param>
+                    </jsonFiles>
+                    <checkBuildResult>true</checkBuildResult>
+                    <skipEmptyJSONFiles>false</skipEmptyJSONFiles>
+                </configuration>
+            </plugin>
         </plugins>        
     </build>       
     

@@ -1,5 +1,6 @@
 param(
-    [string]$CommandResult = 'unknown'
+    [string]$CommandResult = 'unknown',
+    [string]$ExecutedCommand = 'mvn -B -ntp clean test'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -15,6 +16,6 @@ $mavenVersion = (& mvn -version 2>&1 | Select-Object -First 1).ToString()
     "Fecha UTC: $([DateTime]::UtcNow.ToString('o'))"
     "Java: $javaVersion"
     "Maven: $mavenVersion"
-    'Comando: mvn -B -ntp clean test'
+    "Comando: $ExecutedCommand"
     "Resultado real: $CommandResult"
 ) | Set-Content -LiteralPath (Join-Path $outputDirectory 'execution-summary.txt') -Encoding UTF8
