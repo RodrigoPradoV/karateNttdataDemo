@@ -3,10 +3,12 @@ package karate.runner;
 import com.intuit.karate.junit5.Karate;
 
 class TestRunner {
-    
+
     @Karate.Test
-    Karate TestRunner() {
-        return Karate.run("classpath:resources/features/createPetStore.feature").relativeTo(getClass());
+    Karate runAll() {
+        return Karate.run("classpath:resources/features")
+                .outputCucumberJson(true)
+                .relativeTo(getClass());
     }
 
 }

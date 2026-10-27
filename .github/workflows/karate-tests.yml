@@ -1,0 +1,83 @@
+name: Karate API tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  karate:
+    name: Karate / Java 17
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BOOKER_USERNAME: ${{ secrets.BOOKER_USERNAME }}
+      BOOKER_PASSWORD: ${{ secrets.BOOKER_PASSWORD }}
+      PETSTORE_BASE_URL: https://petstore.swagger.io/v2
+      BOOKER_BASE_URL: https://restful-booker.herokuapp.com
+
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17 with Maven cache
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Run Karate suite
+        id: tests
+        shell: bash
+        run: |
+          set +e
+          set -o pipefail
+          mvn -B -ntp clean test 2>&1 | tee .maven-test.log
+          test_exit=${PIPESTATUS[0]}
+          set -e
+          mkdir -p target/evidence
+          mv .maven-test.log target/evidence/maven-test.log
+          echo "exit_code=${test_exit}" >> "$GITHUB_OUTPUT"
+          exit "${test_exit}"
+
+      - name: Capture dependency tree
+        if: always()
+        shell: bash
+        run: mvn -B -ntp dependency:tree -Dscope=test -DoutputFile=target/evidence/dependency-tree.txt
+
+      - name: Write execution identity
+        if: always()
+        shell: pwsh
+        run: ./scripts/write-execution-summary.ps1 -CommandResult '${{ steps.tests.outputs.exit_code }}'
+
+      - name: Check artifacts for exposed secrets
+        id: secret_scan
+        if: always()
+        shell: pwsh
+        run: ./scripts/verify-no-secrets.ps1 -Paths target
+
+      - name: Publish sanitized security summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: karate-security-summary-${{ github.sha }}
+          path: target/security/secret-scan-summary.txt
+          if-no-files-found: warn
+
+      - name: Publish safe Karate evidence
+        if: ${{ always() && steps.secret_scan.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: karate-evidence-${{ github.sha }}
+          path: |
+            target/karate-reports/
+            target/surefire-reports/
+            target/evidence/
+            target/security/secret-scan-summary.txt
+          if-no-files-found: warn
+          retention-days: 14
