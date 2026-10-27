@@ -4,16 +4,16 @@ Secuencia obligatoria: PDF → tag `baseline-karate-original` → modificación 
 
 ## Evidencia final vigente
 
-- Commit validado: `6d38c64f8ad93344e504c8232fcd2671f7774d51`.
-- GitHub Actions: [run 40455709946](https://github.com/RodrigoPradoV/karateNttdataDemo/actions/runs/40455709946), ejecutado con Java 17.0.20.1 y Maven 3.10.0.
+- Commit validado: `02fae06212af69745fecc96c7fb3dcf210b5ff34`.
+- GitHub Actions: [run 40526574821](https://github.com/RodrigoPradoV/karateNttdataDemo/actions/runs/40526574821), ejecutado con Java 17.0.20.1 y Maven 3.10.0.
 - Resultado: 9 escenarios ejecutados, 0 fallos, 0 errores y 0 omitidos.
 - Reportes: Karate nativo y Cucumber HTML generados para 2 features.
 - Seguridad: 34 archivos revisados, sin contraseñas, tokens ni headers de autenticación expuestos.
-- Artifact: `karate-evidence-6d38c64f8ad93344e504c8232fcd2671f7774d51` (ID `12711219868`, SHA-256 `f7c99bfb6eb29ceddcde9c839bcbab571956731e25d10d9581ee99641a69a120`). Copia descargada en `Ejecucion-Karate/Ejecucion-2/`.
+- Artifacts vigentes: evidencia ID `12742524853` y seguridad ID `12742529971`; hashes registrados en `refs/notes/qa-validation` y copias verificadas en `Ejecucion-Karate/Ejecucion-3/`.
 
 | ID | Origen PDF | Clasificación | Estado inicial ZIP | Modificación | Implementación | Prueba y resultado esperado | Estado | Evidencia | Desviación |
 |---|---|---|---|---|---|---|---|---|---|
-| K-REQ-01 | Estructura `.feature`, config, runner y Maven | Requisito original | Estructura parcial; runner a un solo archivo | Descubrimiento completo y config central | `TestRunner.java`, `karate-config.js` | Ejecutar toda la suite o tags | Implementado y aprobado en GitHub Actions | Reporte Karate del artifact final, SHA `6d38c64` | Ninguna |
+| K-REQ-01 | Estructura `.feature`, config, runner y Maven | Requisito original | Estructura parcial; runner a un solo archivo | Descubrimiento completo y config central | `TestRunner.java`, `karate-config.js` | Ejecutar toda la suite o tags | Implementado y aprobado en GitHub Actions | Reporte Karate del artifact final, SHA `02fae06` | Ninguna |
 | K-REQ-02 | Dependencias del cuadro del PDF | Requisito original | Karate 1.0.0; solo junit5 | Alineación exacta | `pom.xml` | Dependency tree, compilación y test | Implementado y aprobado en Java 17 local y CI | `evidence/dependency-tree.txt` del artifact final | Advertencia transitiva Javassist documentada |
 | K-REQ-03 | POST y datos variables con Scenario Outline | Requisito original | Dos nombres fijos sin ID aislado | IDs UUID y dos filas de ejemplo | `petstore.feature` | POST 200 y contrato JSON | Implementado y aprobado en CI | Reporte Karate del artifact final | Ninguna |
 | K-REQ-04 | GET y validación de respuesta | Requisito original | No implementado | GET del ID creado y contenido | `petstore.feature` | GET 200, ID/nombre/estado | Implementado y aprobado en CI | Reporte Karate del artifact final | Ninguna |

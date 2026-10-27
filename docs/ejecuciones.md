@@ -20,7 +20,9 @@ Las filas marcadas como cambio aún no confirmado o evidencia temporal conservan
 | 2026-10-27T05:13Z | cambio de contrato aún no confirmado | Temurin 17.0.20.1 / Maven 3.9.9 | `mvn -B -ntp clean verify` + scan | Aprobado: 9/9 escenarios, reporte Cucumber y scan de 31 archivos | `target/`, evidencia precommit no final |
 | 2026-10-27T05:30Z | `6d38c64f8ad93344e504c8232fcd2671f7774d51` | GitHub Actions, Ubuntu 24.04 / Java 17.0.20.1 / Maven 3.10.0 | `mvn -B -ntp clean test` + generación Cucumber + scan | Aprobado: 9/9 escenarios, 2 features en Cucumber y 34 archivos revisados sin secretos expuestos | [Run `40455709946`](https://github.com/RodrigoPradoV/karateNttdataDemo/actions/runs/40455709946); artifact `karate-evidence-6d38c64f8ad93344e504c8232fcd2671f7774d51`, ID `12711219868`; copia en `Ejecucion-Karate/Ejecucion-2/` |
 
-Las ejecuciones limpias se registran en el resumen generado y en la nota Git `qa-validation` sin alterar el SHA probado. El workflow base fue el run `40448399804`; el cierre final con reporte Cucumber y contratos negativos reforzados corresponde al run `40455709946` sobre `6d38c64`. El artifact incluye el SHA completo, el resultado real del comando, los reportes y el resumen de seguridad.
+Las ejecuciones limpias se registran en el resumen generado y en la nota Git `qa-validation` sin alterar el SHA probado. El workflow base fue el run `40448399804`; el cierre funcional anterior con reporte Cucumber y contratos negativos reforzados corresponde al run `40455709946` sobre `6d38c64` y se conserva como historial. El artifact incluye el SHA completo, el resultado real del comando, los reportes y el resumen de seguridad.
+
+La evidencia vigente de endurecimiento corresponde al [run `40526574821`](https://github.com/RodrigoPradoV/karateNttdataDemo/actions/runs/40526574821), sobre el SHA `02fae06212af69745fecc96c7fb3dcf210b5ff34`: 9/9 escenarios, 0 fallos, 0 errores, 0 omitidos, reportes Karate y Cucumber generados, y 34 archivos revisados sin secretos expuestos. Los artifacts de evidencia y seguridad tienen los IDs `12742524853` y `12742529971`; las copias y hashes están en `Ejecucion-Karate/Ejecucion-3/` y en `refs/notes/qa-validation`.
 
 ## Regresión de 404 deterministas
 
@@ -31,4 +33,4 @@ El 2026-10-27 se reemplazaron las precondiciones negativas basadas en IDs supues
 - El indicador de cleanup permanece activo hasta completar la comprobación 404; si una aserción intermedia falla, el hook conserva su recuperación idempotente.
 - Regresión local focalizada: PetStore 4/4 y Restful Booker 5/5 escenarios aprobados.
 
-El workflow conserva 9 escenarios y publicará la evidencia del mismo SHA con una retención de 90 días. El run, IDs y hashes se relacionan mediante la nota Git `refs/notes/qa-validation` después de la validación remota.
+El workflow conserva 9 escenarios y publicó la evidencia del mismo SHA con una retención de 90 días. El run, IDs y hashes se relacionan mediante la nota Git `refs/notes/qa-validation` después de la validación remota.
