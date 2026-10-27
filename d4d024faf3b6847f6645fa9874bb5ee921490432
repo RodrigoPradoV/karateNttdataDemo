@@ -1,0 +1,13 @@
+Validación local del reporte Cucumber
+
+SHA: d4d024faf3b6847f6645fa9874bb5ee921490432
+
+Plugin: net.masterthought:maven-cucumber-reporting:5.11.0
+
+Run local 1 UTC: 2026-10-27T04:55:01Z - mvn clean verify exit 0, 9/9 escenarios, HTML Cucumber generado, scan 32 archivos aprobado
+
+Run local 2 UTC: 2026-10-27T04:57:16Z - mvn clean verify exit 0, 9/9 escenarios, HTML Cucumber generado, scan 32 archivos aprobado
+
+Salida: target/cucumber-html-reports/overview-features.html
+
+GitHub Actions: pendiente sobre este SHA
