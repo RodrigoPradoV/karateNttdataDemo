@@ -1,0 +1,8 @@
+Validación local de contratos negativos de Restful Booker
+SHA: 6d38c64f8ad93344e504c8232fcd2671f7774d51
+Caracterización UTC: 2026-10-27T05:10Z - 3 PATCH sin autenticación = 403 text/plain Forbidden; 3 GET inexistente = 404 text/plain Not Found
+Suite focalizada UTC: 2026-10-27T05:12Z - 5/5 escenarios aprobados en Java 17
+Run local 1 UTC: 2026-10-27T05:15:09Z - mvn clean verify exit 0, 9/9 escenarios, reporte Cucumber generado, scan 32 archivos aprobado
+Run local 2 UTC: 2026-10-27T05:16:01Z - mvn clean verify exit 0, 9/9 escenarios, reporte Cucumber generado, scan 32 archivos aprobado
+Evidencia: Evidencias_Finales/Karate/negative-contract-local-run-{1,2}-6d38c64
+GitHub Actions: pendiente sobre este SHA
